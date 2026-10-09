@@ -151,56 +151,44 @@ app.post("/api/login", async function(req, res) {
 
 // ================= CHECK LOGIN =================
 
-app.get("/api/me", function(req, res) {
-
+app.get("/api/me", async function(req, res) {
     const token = req.cookies.token;
 
     if (!token) {
-
         return res.status(401).json({
             message: "Not logged in."
         });
-
     }
 
     try {
-
-        const decoded =
-            jwt.verify(
-                token,
-                "FRAUD_SAFE_SECRET_2026"
-            );
-
-        db.query(
-            "SELECT id, name, email FROM users WHERE id = ?",
-            [decoded.id],
-            function(error, results) {
-
-                if (error || results.length === 0) {
-
-                    return res.status(401).json({
-                        message: "User not found."
-                    });
-
-                }
-
-                res.json({
-                    user: results[0]
-                });
-
-            }
+        const decoded = jwt.verify(
+            token,
+            process.env.JWT_SECRET
         );
 
-    } catch (error) {
+        const result = await db.query(
+            "SELECT id, name, email FROM users WHERE id = $1",
+            [decoded.id]
+        );
 
-        res.status(401).json({
-            message: "Session expired."
+        if (result.rows.length === 0) {
+            return res.status(401).json({
+                message: "User not found."
+            });
+        }
+
+        return res.json({
+            user: result.rows[0]
         });
 
+    } catch (error) {
+        console.error("Check login error:", error.message);
+
+        return res.status(401).json({
+            message: "Session expired."
+        });
     }
-
 });
-
 
 // ================= LOGOUT =================
 
