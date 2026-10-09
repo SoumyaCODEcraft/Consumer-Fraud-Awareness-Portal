@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FraudSafe - Consumer Fraud Awareness Portal</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="header">
+
+        <div class="logo">
+            🛡️ <span>FraudSafe</span>
+        </div>
+
+        <nav class="navbar">
+            <a href="#" onclick="showPage('home')">Home</a>
+            <a href="#" onclick="showPage('frauds')">Frauds</a>
+            <a href="#" onclick="showPage('safety')">Safety Tips</a>
+            <a href="#" onclick="showPage('quiz')">Quiz</a>
+            <a href="#" onclick="showPage('report')">Report</a>
+            <a href="#" onclick="showPage('faq')">FAQ</a>
+        </nav>
+
+        <div class="header-buttons">
+            <button onclick="toggleTheme()" class="icon-btn">🌙</button>
+            <button onclick="shareWebsite()" class="share-btn">🔗 Share</button>
+            <button onclick="openLogin()" class="login-btn">Login</button>
+        </div>
+
+    </header>
+
+
+    <!-- ================= HOME PAGE ================= -->
+    <main id="home" class="page active">
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <span class="badge">🛡️ Consumer Safety Platform</span>
+
+                <h1>
+                    Stay Safe From
+                    <span>Online Fraud</span>
+                </h1>
+
+                <p>
+                    Learn about common consumer frauds, identify warning signs,
+                    and protect yourself from online scams.
+                </p>
+
+                <div class="hero-buttons">
+                    <button onclick="showPage('frauds')" class="primary-btn">
+                        Explore Frauds
+                    </button>
+
+                    <button onclick="showPage('safety')" class="secondary-btn">
+                        Safety Tips
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="hero-card">
+                <div class="shield">🛡️</div>
+                <h3>Your Safety Matters</h3>
+                <p>
+                    Knowledge is your first line of defence against fraud.
+                </p>
+            </div>
+
+        </section>
+
+
+        <!-- Statistics -->
+        <section class="stats">
+
+            <div class="stat-card">
+                <h2>10+</h2>
+                <p>Fraud Categories</p>
+            </div>
+
+            <div class="stat-card">
+                <h2>20+</h2>
+                <p>Safety Tips</p>
+            </div>
+
+            <div class="stat-card">
+                <h2>10</h2>
+                <p>Quiz Questions</p>
+            </div>
+
+            <div class="stat-card">
+                <h2>24/7</h2>
+                <p>Awareness</p>
+            </div>
+
+        </section>
+
+
+        <!-- Quick Access -->
+        <section class="quick-section">
+
+            <h2>Quick Access</h2>
+
+            <div class="quick-grid">
+
+                <div class="quick-card" onclick="showPage('frauds')">
+                    <span>🚨</span>
+                    <h3>Fraud Information</h3>
+                    <p>Learn about different types of fraud.</p>
+                </div>
+
+                <div class="quick-card" onclick="showPage('safety')">
+                    <span>🔐</span>
+                    <h3>Safety Tips</h3>
+                    <p>Learn how to protect your personal information.</p>
+                </div>
+
+                <div class="quick-card" onclick="showPage('quiz')">
+                    <span>📝</span>
+                    <h3>Take Quiz</h3>
+                    <p>Test your knowledge about online fraud.</p>
+                </div>
+
+                <div class="quick-card" onclick="showPage('report')">
+                    <span>📢</span>
+                    <h3>Report / Get Help</h3>
+                    <p>Learn what to do if you face fraud.</p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FRAUDS PAGE ================= -->
+    <main id="frauds" class="page">
+
+        <section class="page-header">
+
+            <h1>Common Consumer Frauds</h1>
+
+            <p>
+                Learn about common scams and understand how fraudsters operate.
+            </p>
+
+            <input
+                type="text"
+                id="fraudSearch"
+                placeholder="🔍 Search fraud..."
+                onkeyup="searchFrauds()"
+            >
+
+        </section>
+
+
+        <section class="fraud-grid">
+
+            <div class="fraud-card">
+                <span>🛒</span>
+                <h3>Online Shopping Fraud</h3>
+                <p>Fake websites and fake products used to steal money.</p>
+                <button onclick="showFraudDetails('Online Shopping Fraud')">
+                    Learn More
+                </button>
+            </div>
+
+            <div class="fraud-card">
+                <span>💳</span>
+                <h3>UPI / Payment Fraud</h3>
+                <p>Fraudsters trick users into making unwanted payments.</p>
+                <button onclick="showFraudDetails('UPI / Payment Fraud')">
+                    Learn More
+                </button>
+            </div>
+
+            <div class="fraud-card">
+                <span>🎣</span>
+                <h3>Phishing</h3>
+                <p>Fake messages and websites designed to steal information.</p>
+                <button onclick="showFraudDetails('Phishing')">
+                    Learn More
+                </button>
+            </div>
+
+            <div class="fraud-card">
+                <span>📞</span>
+                <h3>Fake Customer Care</h3>
+                <p>Fake support agents ask for personal or payment details.</p>
+                <button onclick="showFraudDetails('Fake Customer Care')">
+                    Learn More
+                </button>
+            </div>
+
+            <div class="fraud-card">
+                <span>🔢</span>
+                <h3>OTP Scam</h3>
+                <p>Scammers try to obtain OTPs to access accounts.</p>
+                <button onclick="showFraudDetails('OTP Scam')">
+                    Learn More
+                </button>
+            </div>
+
+            <div class="fraud-card">
+                <span>🎁</span>
+                <h3>Fake Offers</h3>
+                <p>Fraudulent discounts, prizes and offers are used to trick users.</p>
+                <button onclick="showFraudDetails('Fake Offers')">
+                    Learn More
+                </button>
+            </div>
+
+            <div class="fraud-card">
+                <span>📦</span>
+                <h3>Delivery Scam</h3>
+                <p>Fake delivery messages or calls are used to collect money.</p>
+                <button onclick="showFraudDetails('Delivery Scam')">
+                    Learn More
+                </button>
+            </div>
+
+            <div class="fraud-card">
+                <span>💼</span>
+                <h3>Fake Job Scam</h3>
+                <p>Fake jobs are used to demand registration or processing fees.</p>
+                <button onclick="showFraudDetails('Fake Job Scam')">
+                    Learn More
+                </button>
+            </div>
+
+            <div class="fraud-card">
+                <span>👤</span>
+                <h3>Impersonation Scam</h3>
+                <p>Scammers pretend to be trusted people or organizations.</p>
+                <button onclick="showFraudDetails('Impersonation Scam')">
+                    Learn More
+                </button>
+            </div>
+
+            <div class="fraud-card">
+                <span>📱</span>
+                <h3>SIM Scam</h3>
+                <p>Fraudsters may try to misuse mobile SIM information.</p>
+                <button onclick="showFraudDetails('SIM Scam')">
+                    Learn More
+                </button>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= SAFETY PAGE ================= -->
+    <main id="safety" class="page">
+
+        <section class="page-header">
+
+            <h1>Safety Tips</h1>
+
+            <p>
+                Follow these simple steps to stay safe from online fraud.
+            </p>
+
+        </section>
+
+
+        <section class="tips-grid">
+
+            <div class="tip-card">
+                <span>🔐</span>
+                <h3>Protect Passwords</h3>
+                <p>Use strong passwords and never share them with others.</p>
+            </div>
+
+            <div class="tip-card">
+                <span>🔢</span>
+                <h3>Never Share OTP</h3>
+                <p>Never share your OTP, PIN or password with anyone.</p>
+            </div>
+
+            <div class="tip-card">
+                <span>🔗</span>
+                <h3>Check Links</h3>
+                <p>Do not open suspicious links received through messages.</p>
+            </div>
+
+            <div class="tip-card">
+                <span>💳</span>
+                <h3>Verify Payments</h3>
+                <p>Check the receiver's details before making a payment.</p>
+            </div>
+
+            <div class="tip-card">
+                <span>📞</span>
+                <h3>Verify Calls</h3>
+                <p>Do not trust unknown callers asking for sensitive information.</p>
+            </div>
+
+            <div class="tip-card">
+                <span>🛒</span>
+                <h3>Use Trusted Websites</h3>
+                <p>Shop from trusted websites and check website addresses.</p>
+            </div>
+
+            <div class="tip-card">
+                <span>📱</span>
+                <h3>Keep Apps Updated</h3>
+                <p>Keep your operating system and applications updated.</p>
+            </div>
+
+            <div class="tip-card">
+                <span>🚨</span>
+                <h3>Report Suspicious Activity</h3>
+                <p>Report suspicious transactions or fraud as soon as possible.</p>
+            </div>
+
+        </section>
+
+
+        <section class="checklist">
+
+            <h2>Safety Checklist</h2>
+
+            <label>
+                <input type="checkbox" class="safe-check">
+                I never share my OTP.
+            </label>
+
+            <label>
+                <input type="checkbox" class="safe-check">
+                I verify links before opening them.
+            </label>
+
+            <label>
+                <input type="checkbox" class="safe-check">
+                I use strong passwords.
+            </label>
+
+            <label>
+                <input type="checkbox" class="safe-check">
+                I verify payment details.
+            </label>
+
+            <button onclick="checkSafety()" class="primary-btn">
+                Check My Safety
+            </button>
+
+            <p id="safetyResult"></p>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= QUIZ PAGE ================= -->
+    <main id="quiz" class="page">
+
+        <section class="page-header">
+
+            <h1>Fraud Awareness Quiz</h1>
+
+            <p>Test your knowledge and learn how to stay safe.</p>
+
+        </section>
+
+
+        <section class="quiz-container">
+
+            <div class="question">
+                <h3>1. Should you share your OTP with someone?</h3>
+
+                <label>
+                    <input type="radio" name="q1" value="wrong">
+                    Yes
+                </label>
+
+                <label>
+                    <input type="radio" name="q1" value="correct">
+                    No
+                </label>
+            </div>
+
+
+            <div class="question">
+                <h3>2. What should you do before opening a suspicious link?</h3>
+
+                <label>
+                    <input type="radio" name="q2" value="correct">
+                    Verify the link
+                </label>
+
+                <label>
+                    <input type="radio" name="q2" value="wrong">
+                    Open it immediately
+                </label>
+            </div>
+
+
+            <div class="question">
+                <h3>3. Should you share your UPI PIN?</h3>
+
+                <label>
+                    <input type="radio" name="q3" value="wrong">
+                    Yes
+                </label>
+
+                <label>
+                    <input type="radio" name="q3" value="correct">
+                    No
+                </label>
+            </div>
+
+
+            <div class="question">
+                <h3>4. What is phishing?</h3>
+
+                <label>
+                    <input type="radio" name="q4" value="correct">
+                    A method used to steal information through fake messages or websites
+                </label>
+
+                <label>
+                    <input type="radio" name="q4" value="wrong">
+                    A type of online shopping
+                </label>
+            </div>
+
+
+            <div class="question">
+                <h3>5. What should you do if you notice suspicious activity?</h3>
+
+                <label>
+                    <input type="radio" name="q5" value="correct">
+                    Report it
+                </label>
+
+                <label>
+                    <input type="radio" name="q5" value="wrong">
+                    Ignore it
+                </label>
+            </div>
+
+
+            <button onclick="submitQuiz()" class="primary-btn">
+                Submit Quiz
+            </button>
+
+            <h2 id="quizResult"></h2>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= REPORT PAGE ================= -->
+    <main id="report" class="page">
+
+        <section class="page-header">
+
+            <h1>Report / Get Help</h1>
+
+            <p>
+                If you face fraud, take quick action and contact the appropriate
+                official service.
+            </p>
+
+        </section>
+
+
+        <section class="help-box">
+
+            <h2>What Should You Do?</h2>
+
+            <ul>
+                <li>Stop communicating with the suspected fraudster.</li>
+                <li>Do not share OTP, PIN or passwords.</li>
+                <li>Contact your bank/payment service if money is involved.</li>
+                <li>Save transaction details and other relevant information.</li>
+                <li>Report the incident through the appropriate official channel.</li>
+            </ul>
+
+        </section>
+
+
+        <section class="report-form">
+
+            <h2>Send Feedback / Report Information</h2>
+
+            <form onsubmit="submitReport(event)">
+
+                <input
+                    type="text"
+                    id="reportName"
+                    placeholder="Your Name"
+                    required
+                >
+
+                <input
+                    type="email"
+                    id="reportEmail"
+                    placeholder="Your Email"
+                    required
+                >
+
+                <select id="reportType" required>
+                    <option value="">Select Fraud Type</option>
+                    <option>Online Shopping Fraud</option>
+                    <option>UPI / Payment Fraud</option>
+                    <option>Phishing</option>
+                    <option>Fake Customer Care</option>
+                    <option>OTP Scam</option>
+                    <option>Fake Offers</option>
+                    <option>Delivery Scam</option>
+                    <option>Fake Job Scam</option>
+                    <option>Impersonation Scam</option>
+                    <option>SIM Scam</option>
+                </select>
+
+                <textarea
+                    id="reportMessage"
+                    placeholder="Write your message..."
+                    rows="5"
+                    required
+                ></textarea>
+
+                <button type="submit" class="primary-btn">
+                    Submit
+                </button>
+
+            </form>
+
+            <p id="reportResult"></p>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FAQ PAGE ================= -->
+    <main id="faq" class="page">
+
+        <section class="page-header">
+
+            <h1>Frequently Asked Questions</h1>
+
+            <p>Find answers to common fraud-awareness questions.</p>
+
+        </section>
+
+
+        <section class="faq-container">
+
+            <div class="faq-item">
+                <button onclick="toggleFAQ(this)">
+                    What is online fraud?
+                    <span>+</span>
+                </button>
+
+                <p>
+                    Online fraud is a dishonest activity carried out through
+                    websites, apps, messages or digital services to steal money
+                    or personal information.
+                </p>
+            </div>
+
+
+            <div class="faq-item">
+                <button onclick="toggleFAQ(this)">
+                    Can I share my OTP?
+                    <span>+</span>
+                </button>
+
+                <p>
+                    No. Never share your OTP with anyone.
+                </p>
+            </div>
+
+
+            <div class="faq-item">
+                <button onclick="toggleFAQ(this)">
+                    How can I identify a fake website?
+                    <span>+</span>
+                </button>
+
+                <p>
+                    Check the website address, spelling, security indicators,
+                    contact information and reviews before using it.
+                </p>
+            </div>
+
+
+            <div class="faq-item">
+                <button onclick="toggleFAQ(this)">
+                    What should I do after a fraud?
+                    <span>+</span>
+                </button>
+
+                <p>
+                    Contact the relevant bank or service provider quickly,
+                    preserve transaction details and report the incident
+                    through an official channel.
+                </p>
+            </div>
+
+
+            <div class="faq-item">
+                <button onclick="toggleFAQ(this)">
+                    Is FraudSafe a banking service?
+                    <span>+</span>
+                </button>
+
+                <p>
+                    No. FraudSafe is an awareness and educational portal.
+                    It does not process payments or banking transactions.
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= LOGIN MODAL ================= -->
+    <div id="loginModal" class="modal">
+
+        <div class="modal-content">
+
+            <button class="close-btn" onclick="closeLogin()">×</button>
+
+            <h2>Login</h2>
+
+            <form id="loginForm">
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="Email"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Password"
+                    required
+                >
+
+                <button type="submit" class="primary-btn">
+                    Login
+                </button>
+
+            </form>
+
+            <p id="loginMessage"></p>
+
+            <p>
+                Don't have an account?
+                <button onclick="openRegister()" class="text-btn">
+                    Register
+                </button>
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= REGISTER MODAL ================= -->
+    <div id="registerModal" class="modal">
+
+        <div class="modal-content">
+
+            <button class="close-btn" onclick="closeRegister()">×</button>
+
+            <h2>Create Account</h2>
+
+            <form id="registerForm">
+
+                <input
+                    type="text"
+                    id="registerName"
+                    placeholder="Full Name"
+                    required
+                >
+
+                <input
+                    type="email"
+                    id="registerEmaoil"
+                    >
+<script src="script.js?v=2"></script>
+</body>
+</html>
