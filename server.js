@@ -14,12 +14,12 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(__dirname));
 
-// MySQL Connection
-const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "fraud_safe"
+// PostgreSQL Connection
+const db = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
 // Connect to MySQL
