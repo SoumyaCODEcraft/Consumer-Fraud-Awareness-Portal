@@ -79,90 +79,75 @@ app.post("/api/register", async function(req, res) {
 
 // ================= LOGIN =================
 
-app.post("/api/login", function(req, res) {
-
+app.post("/api/login", async function(req, res) {
     const { email, password } = req.body;
 
     if (!email || !password) {
-
         return res.status(400).json({
             message: "Please enter email and password."
         });
-
     }
 
-    db.query(
-        "SELECT * FROM users WHERE email = ?",
-        [email],
-        async function(error, results) {
+    try {
+        const result = await db.query(
+            "SELECT * FROM users WHERE email = $1",
+            [email]
+        );
 
-            if (error) {
-
-                console.log(error);
-
-                return res.status(500).json({
-                    message: "Database error."
-                });
-
-            }
-
-            if (results.length === 0) {
-
-                return res.status(401).json({
-                    message: "Invalid email or password."
-                });
-
-            }
-
-            const user = results[0];
-
-            const passwordMatch =
-                await bcrypt.compare(
-                    password,
-                    user.password_hash
-                );
-
-            if (!passwordMatch) {
-
-                return res.status(401).json({
-                    message: "Invalid email or password."
-                });
-
-            }
-
-            // Create JWT
-            const token = jwt.sign(
-                {
-                    id: user.id,
-                    email: user.email
-                },
-                "FRAUD_SAFE_SECRET_2026",
-                {
-                    expiresIn: "2h"
-                }
-            );
-
-            // Store token in HTTP-only cookie
-            res.cookie("token", token, {
-                httpOnly: true,
-                sameSite: "lax",
-                maxAge: 2 * 60 * 60 * 1000
+        if (result.rows.length === 0) {
+            return res.status(401).json({
+                message: "Invalid email or password."
             });
-
-            res.json({
-                message: "Login successful.",
-                user: {
-                    id: user.id,
-                    name: user.name,
-                    email: user.email
-                }
-            });
-
         }
-    );
 
+        const user = result.rows[0];
+
+        const passwordMatch = await bcrypt.compare(
+            password,
+            user.password_hash
+        );
+
+        if (!passwordMatch) {
+            return res.status(401).json({
+                message: "Invalid email or password."
+            });
+        }
+
+        const token = jwt.sign(
+            {
+                id: user.id,
+                email: user.email
+            },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: "2h"
+            }
+        );
+
+        res.cookie("token", token, {
+            httpOnly: true,
+            sameSite: "lax",
+            secure: true,
+            maxAge: 2 * 60 * 60 * 1000
+        });
+
+        return res.json({
+            message: "Login successful.",
+            user: {
+                id: user.id,
+                name: user.name,
+                email: user.email
+            }
+        });
+
+    } catch (error) {
+        console.error("Login error:", error.message);
+
+        return res.status(500).json({
+            message: "Login failed. Please try again."
+        });
+    }
 });
-
 
 // ================= CHECK LOGIN =================
 
