@@ -23,19 +23,9 @@ const db = new Pool({
 });
 
 // Connect to MySQL
-db.connect(function(error) {
-
-    if (error) {
-        console.log("❌ MySQL connection failed:");
-        console.log(error.message);
-        return;
-    }
-
-    console.log("✅ MySQL connected successfully!");
-    console.log("✅ Database: fraud_safe");
-
-});
-
+db.query("SELECT NOW()")
+    .then(() => console.log("✅ PostgreSQL connected successfully!"))
+    .catch(error => console.error("❌ PostgreSQL connection failed:", error.message));
 
 // ================= REGISTER =================
 
