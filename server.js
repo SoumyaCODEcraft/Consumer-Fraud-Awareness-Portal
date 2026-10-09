@@ -30,93 +30,50 @@ db.query("SELECT NOW()")
 // ================= REGISTER =================
 
 app.post("/api/register", async function(req, res) {
-
     const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
-
         return res.status(400).json({
             message: "Please fill all fields."
         });
-
     }
 
     if (password.length < 6) {
-
         return res.status(400).json({
             message: "Password must be at least 6 characters."
         });
-
     }
 
     try {
-
-        // Check existing email
-        db.query(
-            "SELECT id FROM users WHERE email = ?",
-            [email],
-            async function(error, results) {
-
-                if (error) {
-
-                    console.log(error);
-
-                    return res.status(500).json({
-                        message: "Database error."
-                    });
-
-                }
-
-                if (results.length > 0) {
-
-                    return res.status(409).json({
-                        message: "Email already registered."
-                    });
-
-                }
-
-                // Hash password
-                const passwordHash =
-                    await bcrypt.hash(password, 10);
-
-                // Insert user
-                db.query(
-                    `INSERT INTO users
-                    (name, email, password_hash)
-                    VALUES (?, ?, ?)`,
-                    [name, email, passwordHash],
-                    function(error) {
-
-                        if (error) {
-
-                            console.log(error);
-
-                            return res.status(500).json({
-                                message: "Registration failed."
-                            });
-
-                        }
-
-                        res.status(201).json({
-                            message: "Registration successful."
-                        });
-
-                    }
-                );
-
-            }
+        const existingUser = await db.query(
+            "SELECT id FROM users WHERE email = $1",
+            [email]
         );
 
-    } catch (error) {
+        if (existingUser.rows.length > 0) {
+            return res.status(409).json({
+                message: "Email already registered."
+            });
+        }
 
-        console.log(error);
+        const passwordHash = await bcrypt.hash(password, 10);
 
-        res.status(500).json({
-            message: "Server error."
+        await db.query(
+            `INSERT INTO users (name, email, password_hash)
+             VALUES ($1, $2, $3)`,
+            [name, email, passwordHash]
+        );
+
+        return res.status(201).json({
+            message: "Registration successful."
         });
 
+    } catch (error) {
+        console.error("Registration error:", error.message);
+        return res.status(500).json({
+            message: "Registration failed. Please try again."
+        });
     }
-
 });
 
 
