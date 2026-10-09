@@ -26,7 +26,17 @@ const db = new Pool({
 db.query("SELECT NOW()")
     .then(() => console.log("✅ PostgreSQL connected successfully!"))
     .catch(error => console.error("❌ PostgreSQL connection failed:", error.message));
-
+db.query(`
+    CREATE TABLE IF NOT EXISTS users (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(100) NOT NULL,
+        email VARCHAR(255) UNIQUE NOT NULL,
+        password_hash VARCHAR(255) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+`)
+.then(() => console.log("Users table ready!"))
+.catch(error => console.error("Table setup failed:", error.message));
 // ================= REGISTER =================
 
 app.post("/api/register", async function(req, res) {
