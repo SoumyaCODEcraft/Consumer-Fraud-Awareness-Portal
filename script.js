@@ -872,17 +872,31 @@ const fraudDetails = {
 };
 
 function showFraudDetails(topic) {
-  const item = fraudDetails[topic];
+  const topicMap = {
+    "Online Shopping Fraud": "shopping",
+    "UPI / Payment Fraud": "upi",
+    "Phishing": "phishing",
+    "Fake Customer Care": "customerCare",
+    "OTP Scam": "otp",
+    "Fake Offers": "lottery",
+    "Delivery Scam": "shopping",
+    "Fake Job Scam": "jobs",
+    "Impersonation Scam": "socialMedia",
+    "SIM Scam": "otp"
+  };
+
+  const key = topicMap[topic];
+  const item = fraudDetails[key];
 
   if (!item) {
-    alert("Details for this topic are not available.");
+    alert("Details are not available for this topic yet.");
     return;
   }
 
   const section = document.getElementById("fraudDetails");
 
   if (!section) {
-    alert("Please add the fraudDetails section to index.html.");
+    alert("Fraud details section is missing.");
     return;
   }
 
