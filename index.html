@@ -710,5 +710,22 @@
 <script src="script.js?v=2"></script>
             <section id="fraudDetails"hidden>
             </section>
+            <!-- Fraud Details Popup -->
+<div id="fraudModal" class="modal">
+  <div class="modal-content">
+    <button type="button" onclick="closeFraudDetails()">✖ Close</button>
+
+    <h2 id="fraudTitle">Fraud Details</h2>
+
+    <h3>About This Fraud</h3>
+    <p id="fraudDescription"></p>
+
+    <h3>Warning Signs</h3>
+    <p id="fraudWarning"></p>
+
+    <h3>How to Stay Safe</h3>
+    <p id="fraudPrevention"></p>
+  </div>
+</div>
 </body>
 </html>
