@@ -654,15 +654,18 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 async function logoutUser() {
     try {
-        await fetch("/api/logout", {
+        const response = await fetch("/api/logout", {
             method: "POST",
             credentials: "same-origin"
         });
 
-        alert("You have been logged out successfully!");
-        location.reload();
-
+        if (response.ok) {
+            alert("You have been logged out successfully!");
+            location.reload();
+        } else {
+            alert("Logout failed. Please try again.");
+        }
     } catch (error) {
-        alert("Logout failed. Please try again.");
+        alert("Server connection failed. Please try again.");
     }
 }
