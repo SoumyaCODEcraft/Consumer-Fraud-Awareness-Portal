@@ -16,6 +16,19 @@
     --danger: #ef4444;
     --success: #16a34a;
 }
+.logout-btn {
+    background: #dc2626;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.logout-btn:hover {
+    background: #b91c1c;
+}
 
 body {
     font-family: Arial, Helvetica, sans-serif;
