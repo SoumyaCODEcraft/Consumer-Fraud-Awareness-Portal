@@ -652,3 +652,8 @@ document.addEventListener("DOMContentLoaded", function() {
     checkLoginStatus();
 
 });
+function logoutUser() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("users");
+    alert("You have been logged out successfully!")
+}
