@@ -12,8 +12,8 @@
 // Your data is protected by Row Level Security (see supabase-schema.sql),
 // not by hiding this key.
 
-const SUPABASE_URL = "https://YOUR-PROJECT-REF.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "YOUR-PUBLISHABLE-KEY";
+const SUPABASE_URL = "https://frsetntbjrlgbouksjur.supabase.co/";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_jVNF2sOxwbg7ELsajRtKJw_Lx6MWO8R";
 
 // True only after you have replaced the two placeholder values above.
 const SUPABASE_IS_CONFIGURED =
